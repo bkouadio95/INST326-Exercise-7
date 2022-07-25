@@ -1,0 +1,92 @@
+
+""" course  INST326 : exercise 7
+    Driver : Betty Kouadio 
+    Directory Id :  HP
+    Navigator:  Kyle Breitenother
+    Directory ID: kbreiten
+    Assignment: Exercise 7 
+    Signed of by: Joshua Cohen
+"""
+import sys
+import random
+
+class Players():
+    """Creates name and position attributes.
+    
+    This class will serve as a parent class to the sub classes
+    RedPlayer and BluePlayer.
+    
+    Attributes:
+        name (str): The name of the player. 
+        position (int): Represents how many miles they are along a trail. 
+    
+    """
+    def __init__(self, name):
+        self.name = name
+        
+        self.position = 0
+    
+class RedPlayer(Players):
+    """Allows the red player to walk a certain distance. 
+    
+    Attributes:
+        name (str): The name of the player. 
+        
+    """
+    def __init__(self, name):
+        Players.__init__(self, name)
+        
+    def walk(self):
+        """Will change the position attribute by a certain amount.
+        
+        """
+        self.position += random.randint(1,10)
+        
+class BluePlayer(Players):
+    """Allows the red player to walk a certain distance. 
+    
+    Attributes:
+        name (str): Will help to identify which player is being called. 
+        
+    """
+    def __init__(self, name):
+        Players.__init__(self, name)
+        
+    def walk(self):
+        """Will change the position attribute by a certain amount.
+        
+        """
+        self.position += random.randint(4,8)
+            
+def play_game():
+    """This function creates the game. 
+    This function creates a list containing three instances each of the 
+    red and blue players and assigns them names such as redplayer1, redplayer2,
+    etc. Uses a loop to check the position of the player to see who won the game. 
+    The player wins the game if they reaches 100, which is also the finish line. 
+
+    Returns:
+        player.name (str): The name of players
+        count (int): The number of times the list was iterated through. Can also
+        be thought of as the players position. 
+    """
+    
+    instance = 0
+    list_of_players = []
+    
+    while instance < 3:
+            list_of_players.extend([RedPlayer(f"If the redplayer takes {instance} steps then their location would be" ), BluePlayer(f"If the blueplayer takes {instance} steps then their location would be ")])
+            
+            instance += 1
+    
+    count = 0
+    
+    while True:
+        count += 1
+        for player in list_of_players:
+            player.walk()
+            if player.position >= 100:
+                return player.name, count
+
+if __name__ == "__main__":
+    print(play_game())
